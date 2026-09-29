@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <script src="https://telegram.org/js/telegram-web-app.js?63"></script>
+  <meta name="theme-color" content="#071b2b" />
+  <title>Мармеладный остров</title>
+<script>
+    (() => {
+      const tg = window.Telegram?.WebApp;
+      if (tg) { tg.ready(); tg.expand(); }
+      const setVH=()=>{
+        const h=tg?.viewportStableHeight || tg?.viewportHeight || window.visualViewport?.height || window.innerHeight;
+        document.documentElement.style.setProperty("--app-height", `${Math.round(h)}px`);
+      };
+      setVH();
+      window.addEventListener("resize", setVH);
+      window.addEventListener("orientationchange", setVH);
+      window.visualViewport?.addEventListener("resize", setVH);
+      tg?.onEvent?.("viewportChanged", setVH);
+    })();
+  </script>
+</head>
+<body>
+  <div id="app"></div>
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
